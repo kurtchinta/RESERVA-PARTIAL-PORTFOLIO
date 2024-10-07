@@ -12,7 +12,7 @@ export const contactSection: ContactSectionType = {
     location: {
       icon: 'MapPin',
       title: 'Location',
-      content: 'Barangay Talo-ao, Buenavista Agusan del Norte'
+      content: 'Purok 3, Barangay Talo-ao, Buenavista Agusan del Norte'
     },
     phone: {
       icon: 'Phone',
