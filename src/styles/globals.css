@@ -1,0 +1,277 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Theme */
+    --color-bg: #F0F8FF; /* Alice Blue */
+    --color-bg-secondary: #E6E6FA; /* Lavender */
+    --color-accent: #6A5ACD; /* Slate Blue */
+    --color-accent-light: theme(colors.purple.500/0.1);
+    --color-accent-torch: theme(colors.indigo.700/0.15);
+    --color-text: #2F4F4F; /* Dark Slate Gray */
+    --color-dark-1: #36454F; /* Charcoal */
+    --color-dark-2: #4A4A4A; /* Dim Gray */
+    --color-dark-3: #708090; /* Slate Gray */
+  }
+
+  /* Dark Theme */
+  .dark {
+    --color-bg: #0B0B1F; /* Deep Space */
+    --color-bg-secondary: #1A1A2E; /* Midnight Blue */
+    --color-accent: #00FFFF; /* Cyan */
+    --color-accent-light: theme(colors.cyan.400/0.1);
+    --color-text: #E0FFFF; /* Light Cyan */
+    --color-dark-1: #F0F8FF; /* Alice Blue */
+    --color-dark-2: #E6E6FA; /* Lavender */
+    --color-dark-3: #4169E1; /* Royal Blue */
+  }
+
+  @font-face {
+    font-family: 'agustina';
+    src: url('/fonts/Agustina-Signature.otf') format('opentype');
+  }
+
+  * {
+    @apply focus:outline-dashed outline-[3px] outline-offset-4 outline-accent transition-all duration-300;
+  }
+
+  ::selection {
+    @apply dark:bg-cyan-600/30 bg-indigo-400/30 text-accent;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    background-image: 
+      radial-gradient(circle at 10% 20%, var(--color-accent-light) 0%, transparent 20%),
+      radial-gradient(circle at 90% 80%, var(--color-accent-torch) 0%, transparent 20%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    transition: all 0.5s ease;
+  }
+
+  .dark body {
+    background-image: 
+      radial-gradient(circle at 10% 20%, var(--color-accent-light) 0%, transparent 30%),
+      radial-gradient(circle at 90% 80%, var(--color-accent-torch) 0%, transparent 30%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Animated gradient text for headings */
+  @keyframes gradient-text {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Floating animation */
+  @keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+  }
+
+  /* Glowing effect */
+  @keyframes glow {
+    0% { box-shadow: 0 0 5px var(--color-accent); }
+    50% { box-shadow: 0 0 20px var(--color-accent), 0 0 30px var(--color-accent); }
+    100% { box-shadow: 0 0 5px var(--color-accent); }
+  }
+}
+
+/* TYPOGRAPHY */
+
+.heading-secondary,
+.h2 {
+  @apply text-3xl sm:text-4xl capitalize font-bold mb-8 sm:mb-12 text-transparent bg-clip-text relative;
+  background-image: linear-gradient(45deg, var(--color-accent), var(--color-dark-2), var(--color-accent));
+  background-size: 200% auto;
+  animation: gradient-text 5s ease infinite;
+}
+
+.dark .heading-secondary,
+.dark .h2 {
+  background-image: linear-gradient(45deg, var(--color-accent), var(--color-dark-1), var(--color-accent));
+  text-shadow: 0 0 10px var(--color-accent-light);
+}
+
+.heading-secondary::after,
+.h2::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+
+.heading-secondary:hover::after,
+.h2:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.heading-tertiary,
+.h3 {
+  @apply text-xl sm:text-2xl tracking-wide capitalize font-medium relative inline-block;
+  color: var(--color-dark-2);
+  text-shadow: 1px 1px 2px var(--color-accent-light);
+}
+
+.dark .heading-tertiary,
+.dark .h3 {
+  color: var(--color-dark-1);
+  text-shadow: 0 0 5px var(--color-accent);
+}
+
+.heading-tertiary::before,
+.h3::before {
+  content: '•';
+  @apply absolute -left-4 text-accent opacity-0 transition-all duration-300;
+}
+
+.heading-tertiary:hover::before,
+.h3:hover::before {
+  @apply opacity-100 -left-6;
+}
+
+/* Add some hover effects */
+a, button {
+  @apply transition-all duration-300 ease-in-out relative overflow-hidden;
+}
+
+a::after, button::after {
+  content: '';
+  @apply absolute inset-0 bg-accent opacity-0 transition-opacity duration-300 ease-in-out;
+}
+
+a:hover::after, button:hover::after {
+  @apply opacity-10;
+}
+
+a:hover, button:hover {
+  @apply text-accent scale-105;
+}
+
+.dark a:hover, .dark button:hover {
+  text-shadow: 0 0 5px var(--color-accent);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-dark-2);
+}
+
+/* Card styling */
+.card {
+  @apply bg-bg-secondary rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl;
+  animation: float 6s ease-in-out infinite;
+}
+
+.dark .card {
+  @apply bg-bg-secondary bg-opacity-30 backdrop-blur-md;
+  animation: float 6s ease-in-out infinite, glow 3s ease-in-out infinite;
+}
+
+/* Image hover effect */
+.image-hover {
+  @apply relative overflow-hidden;
+}
+
+.image-hover img {
+  @apply transition-transform duration-300 ease-in-out;
+}
+
+.image-hover:hover img {
+  @apply scale-110;
+}
+
+.image-hover::after {
+  content: '';
+  @apply absolute inset-0 bg-accent opacity-0 transition-opacity duration-300 ease-in-out;
+}
+
+.image-hover:hover::after {
+  @apply opacity-20;
+}
+
+.dark .image-hover::after {
+  @apply bg-accent opacity-10;
+}
+
+.dark .image-hover:hover::after {
+  @apply opacity-30;
+}
+
+/* Animated background for special sections */
+.animated-bg {
+  background: linear-gradient(-45deg, var(--color-bg), var(--color-bg-secondary), var(--color-accent-light), var(--color-bg));
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.dark .animated-bg {
+  background: linear-gradient(-45deg, var(--color-bg), var(--color-bg-secondary), var(--color-accent), var(--color-bg));
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Neon text effect for dark mode */
+.dark .neon-text {
+  color: var(--color-text);
+  text-shadow: 
+    0 0 5px var(--color-accent),
+    0 0 10px var(--color-accent),
+    0 0 20px var(--color-accent),
+    0 0 40px var(--color-accent);
+}
+
+/* Particle effect for dark mode */
+.dark .particle-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.dark .particle {
+  position: absolute;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: particle-animation 20s infinite;
+}
+
+@keyframes particle-animation {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: translateY(-100vh) translateX(100vw); opacity: 0; }
+}
