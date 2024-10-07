@@ -3,11 +3,8 @@ import { navbarSection } from '@/lib/content/navbar';
 import { author } from '@/lib/content/portfolio';
 import useWindowWidth from '@/lib/hooks/use-window-width';
 import { getBreakpointsWidth } from '@/lib/utils/helper';
-
 import { Button, DarkModeButton, Link as CLink, NavButton } from '@/components';
-
 import { fadeIn, slideIn } from '@/styles/animations';
-
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -98,14 +95,28 @@ const Navbar = () => {
         </Link>
       </h1>
 
-      <NavButton
-        onClick={() => {
-          setNavbarCollapsed((prev) => !prev);
-        }}
-        navbarCollapsed={navbarCollapsed}
-        className="md:invisible"
-      />
+      <div className="flex items-center">
+        {/* DarkModeButton and NavButton on mobile */}
+        <DarkModeButton
+          className="mr-2 md:hidden" // Ensure visible only on mobile
+          variants={slideIn({
+            delay: ANIMATION_DELAY,
+            direction: 'down',
+          })}
+          initial="hidden"
+          animate="show"
+        />
+        
+        <NavButton
+          onClick={() => {
+            setNavbarCollapsed((prev) => !prev);
+          }}
+          navbarCollapsed={navbarCollapsed}
+          className="md:hidden" // Visible only on mobile
+        />
+      </div>
 
+      {/* Collapsible navbar for mobile */}
       {(navbarCollapsed || windowWidth > md) && (
         <nav className="capitalize absolute text-sm duration-200 md:bg-transparent z-50 w-[90%] left-1/2 -translate-x-1/2 top-full h-max rounded-xl shadow-xl p-6 bg-bg-secondary md:blocks md:static md:w-auto md:left-auto md:transform-none md:top-auto md:rounded-none md:shadow-none md:p-0 md:h-auto">
           <ul className="flex flex-col items-stretch gap-3 list-style-none lg:gap-5 xl:gap-6 md:flex-row md:items-center">
@@ -121,10 +132,10 @@ const Navbar = () => {
               </NavItem>
             ))}
 
-            <div className="flex items-center justify-between gap-5 xl:gap-6">
-             
+            {/* DarkModeButton stays in the navbar for desktop */}
+            <li className="hidden md:block"> {/* Visible only on desktop */}
               <DarkModeButton
-                onClick={() => setNavbarCollapsed(false)}
+                className="ml-4"
                 variants={slideIn({
                   delay: ANIMATION_DELAY + (navLinks.length + 1) / 10,
                   direction: 'down',
@@ -132,7 +143,7 @@ const Navbar = () => {
                 initial="hidden"
                 animate="show"
               />
-            </div>
+            </li>
           </ul>
         </nav>
       )}
