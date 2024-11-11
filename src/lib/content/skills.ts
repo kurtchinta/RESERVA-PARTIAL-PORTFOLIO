@@ -13,7 +13,7 @@ export const skillsSection: SkillsSectionType = {
         dark: '/lotties/frontend-dark.json',
       },
       points: [
-        'Building full-stack web applications using Next.js with TypeScript, TailwindCSS/Bootstrap, and Postgres.',
+        'Building full-stack web applications using Next.js with TypeScript, TailwindCSS/Bootstrap, and Postgres/Supabase.',
         'Creating responsive single-page applications with CapacitorJs, VueJs, and ReactJs, and developing web and mobile apps using modern frameworks for user-friendly solutions.',
       ],
       softwareSkills: [
@@ -25,16 +25,16 @@ export const skillsSection: SkillsSectionType = {
           name: 'typeScript',
           icon: 'vscode-icons:file-type-typescript-official',
         },
-        { name: 'nodejs', icon: 'logos:nodejs-icon' },
+        { name: 'supabase', icon: 'logos:supabase-icon' },
         { name: 'capacitorjs', icon: 'logos:capacitorjs-icon' },
         { name: 'reactjs', icon: 'logos:react' },
         { name: 'nextjs', icon: 'logos:nextjs-icon' },
         { name: 'vuejs', icon: 'devicon:vuejs' },
-        // { name: 'angularjs', icon: 'logos:angular-icon' },
+        { name: 'angularjs', icon: 'vscode-icons:file-type-angular' },
+        { name: 'jest', icon: 'vscode-icons:file-type-jest' },
         { name: 'tailwindcss', icon: 'logos:tailwindcss-icon' },
         { name: 'bootstrapcss', icon: 'logos:bootstrap' },
         { name: 'postgres', icon: 'logos:postgresql' },
-        { name: 'database', icon: 'vscode-icons:file-type-sql' },
       ],
     },
     {

@@ -1,3 +1,4 @@
+// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
@@ -15,7 +16,7 @@ module.exports = {
       colors: {
         bg: 'var(--color-bg)',
         'bg-secondary': 'var(--color-bg-secondary)',
-        accent: 'var(--color-accent)',
+        accent: 'rgb(var(--color-accent-rgb))', // Updated to use RGB variable
         'accent-light': 'var(--color-accent-light)',
         text: 'var(--color-text)',
         'dark-1': 'var(--color-dark-1)',

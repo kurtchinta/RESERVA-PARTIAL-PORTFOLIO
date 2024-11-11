@@ -1,4 +1,5 @@
 'use client';
+
 import { aboutSection } from '@/lib/content/about';
 import { author } from '@/lib/content/portfolio';
 import { getId } from '@/lib/utils/helper';
@@ -9,7 +10,7 @@ import { getSectionAnimation } from '@/styles/animations';
 
 import { useEffect, useState } from 'react';
 
-const About = () => {
+export default function About() {
   const { title, img, list } = aboutSection;
   // To avoid hydration error
   const [domLoaded, setDomLoaded] = useState(false);
@@ -24,18 +25,18 @@ const About = () => {
       <main className="flex flex-col items-center gap-16 lg:items-start lg:flex-row">
         <div className="space-y-4 lg:w-3/5">
           <p>
-          Hello! I'm Kurt Reserva, a 3rd-year student from the Bachelor of Science in Information Technology at{' '}
+            Hello! I'm Kurt Reserva, a 3rd-year student from the Bachelor of Science in Information Technology at{' '}
             <Link
               href="https://www.carsu.edu.ph/"
               target="_blank"
-              className="text-accent"
+              className="text-blue-500 hover:text-blue-600 transition-colors"
             >
               Caraga State University
             </Link>
             .<br />  I am focused on improving my skills through learning and projects, while managing my studies and aiming to make a meaningful impact in the tech industry soon.
           </p>
           <p>
-          My main focus right now is learning mobile development while exploring different development platforms as a student.
+            My main focus right now is learning mobile development while exploring different development platforms as a student.
           </p>
 
           {list && (
@@ -55,6 +56,4 @@ const About = () => {
   ) : (
     <></>
   );
-};
-
-export default About;
+}
